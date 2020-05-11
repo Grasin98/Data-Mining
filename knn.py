@@ -97,3 +97,15 @@ accuracies = cross_val_score(estimator = classifier, X = X_train, y = y_train, c
 print(accuracies.mean())
 print(accuracies.std())
 
+
+from sklearn.ensemble import AdaBoostClassifier
+classifier = AdaBoostClassifier(n_estimators=300, learning_rate=0.01)
+classifier.fit(X_train, y_train)
+
+y_pred_ada = classifier.predict(X_test)
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_test, y_pred_ada.round())
+print(cm)
+accuracies_ada = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
+print(accuracies_ada.mean())
+print(accuracies_ada.std())
